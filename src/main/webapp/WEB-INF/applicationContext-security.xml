@@ -5,20 +5,47 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
-
+    
     <http use-expressions="true">
         <intercept-url pattern="/welcome.jsp" access="isAuthenticated()" />
-        <intercept-url pattern="/private/**" access="hasRole('Managers')" />
+        <intercept-url pattern="/private/**" access="hasRole('ROLE_MANAGERS')" />
         <intercept-url pattern="/**" access="permitAll" />
         <form-login login-page="/login.jsp" authentication-failure-url="/login-error.jsp" />
     </http>
+    
+    <beans:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+        <beans:constructor-arg value="ldap://localhost:1389/dc=opencsi,dc=com" />
+    </beans:bean>
+
+    <beans:bean id="ldapAuthProvider"
+    class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+                <beans:constructor-arg ref="contextSource" />
+                <beans:property name="userSearch" ref="userSearch" />
+            </beans:bean>
+        </beans:constructor-arg>
+        
+        <beans:constructor-arg>
+            <beans:bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+                <beans:constructor-arg ref="contextSource"/>
+                <beans:constructor-arg value="ou=groups"/>
+                <beans:property name="groupSearchFilter" value="(uniqueMember={0})"/>
+                <beans:property name="groupRoleAttribute" value="cn" />
+                <beans:property name="convertToUpperCase" value="true" />
+                <beans:property name="rolePrefix" value="ROLE_" />
+            </beans:bean>
+        </beans:constructor-arg>    
+    </beans:bean>
+    
+    <beans:bean id="userSearch" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+        <beans:constructor-arg index="0" value="ou=People" />
+        <beans:constructor-arg index="1" value="(uid={0})" />
+        <beans:constructor-arg index="2" ref="contextSource" />
+        <beans:property name="searchSubtree" value="true" />
+    </beans:bean>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="customer" password="customer" authorities="Customers" />
-                <user name="manager" password="manager" authorities="Managers" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref='ldapAuthProvider' />
     </authentication-manager>
 </beans:beans>
