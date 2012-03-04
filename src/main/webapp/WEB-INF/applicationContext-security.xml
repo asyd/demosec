@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
-    <http use-expressions="true">    
+    <http use-expressions="true">
         <intercept-url pattern="/welcome.jsp" access="isAuthenticated()" />
         <intercept-url pattern="/private/**" access="hasRole('Managers')" />
         <intercept-url pattern="/**" access="permitAll" />
@@ -21,4 +21,4 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
-</beans:beans> 
+</beans:beans>
