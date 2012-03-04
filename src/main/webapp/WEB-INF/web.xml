@@ -12,6 +12,10 @@
         </form-login-config>
     </login-config>
     
+    <error-page>
+        <error-code>403</error-code>
+        <location>/accesserror.jsp</location>
+    </error-page>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secure pages</web-resource-name>

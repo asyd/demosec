@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/demosec"/>
+<Context antiJARLocking="true" path="/demosec">
+    <Realm className="org.apache.catalina.realm.JNDIRealm"
+		connectionURL="ldap://localhost:1389"
+		userBase="ou=People,dc=opencsi,dc=com"
+		userSearch="(uid={0})"
+                userSubtree="true"
+		roleBase="ou=Groups,dc=opencsi,dc=com"
+		roleName="cn"
+		roleSearch="(uniqueMember={0})" />
+</Context>
