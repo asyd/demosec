@@ -11,7 +11,7 @@
         <jsp:include page="header.jsp" />
 
         <div class="container">
-            <form class="well" method="POST" action="j_security_check">
+            <form class="well" method="POST" action="j_spring_security_check">
                 <label>Username</label>
                 <input type="text" name="j_username" placeholder="Type something" />
                 <input type="password" name="j_password" placeholder="***" />

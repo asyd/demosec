@@ -10,7 +10,7 @@
         <intercept-url pattern="/welcome.jsp" access="isAuthenticated()" />
         <intercept-url pattern="/private/**" access="hasRole('Managers')" />
         <intercept-url pattern="/**" access="permitAll" />
-        <form-login />
+        <form-login login-page="/login.jsp" authentication-failure-url="/login-error.jsp" />
     </http>
 
     <authentication-manager>
