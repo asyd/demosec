@@ -8,9 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p>This a public pages, everyone can read it. If you want to read 
-         <a href="/private">this page</a> you need to be authenticated through a
-         container realm with the role <b>manager</b>.</a></p>
+        <h1>Welcome in the private part</h1>
     </body>
 </html>
