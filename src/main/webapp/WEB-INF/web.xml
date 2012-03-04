@@ -5,43 +5,20 @@
 <web-app>
     <display-name>OpenCSI Security demo application</display-name>
 
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/login.jsp</form-login-page>
-            <form-error-page>/login-error.jsp</form-error-page>
-        </form-login-config>
-    </login-config>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext-security.xml
+        </param-value>
+    </context-param>
     
-    <error-page>
-        <error-code>403</error-code>
-        <location>/accesserror.jsp</location>
-    </error-page>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Secure pages</web-resource-name>
-            <description> accessible by authorised users </description>
-            <url-pattern>/private/*</url-pattern>
-            <http-method>GET</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>Only for managers</description>
-            <role-name>Managers</role-name>
-        </auth-constraint>
-    </security-constraint>
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Secure pages</web-resource-name>
-            <description>accessible by all authenticated users </description>
-            <url-pattern>/welcome.jsp</url-pattern>
-            <http-method>GET</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>All users</description>
-            <role-name>Managers</role-name>
-            <role-name>Customers</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
