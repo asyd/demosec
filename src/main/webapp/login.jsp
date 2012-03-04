@@ -11,8 +11,13 @@
         <jsp:include page="header.jsp" />
 
         <div class="container">
-            <h1>403 Error</h1>
-            <h2>Authentication or access Error!</h2>
+            <form class="well" method="POST" action="j_security_check">
+                <label>Username</label>
+                <input type="text" name="j_username" placeholder="Type something" />
+                <input type="password" name="j_password" placeholder="***" />
+                <br />
+                <button type="submit" class="btn">Submit</button>
+            </form>
         </div>
     </body>
 </html>

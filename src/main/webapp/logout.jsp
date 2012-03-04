@@ -1,24 +1,21 @@
-<%-- 
-    Document   : logout
-    Created on : 4 mars 2012, 15:58:01
-    Author     : asyd
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
-
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Homepage</title>
     </head>
     <body>
-        <%@ page session="true"%>
+        <jsp:include page="header.jsp" />
 
-        User '<%=request.getRemoteUser()%>' has been logged out.
+        <div class="container">
+            <%@ page session="true"%>
 
-        <% session.invalidate();%>
-        <a href="/demosec">Homepage</a>
+            User '<%=request.getRemoteUser()%>' has been logged out.
+
+            <% session.invalidate();%>
+        </div>
     </body>
 </html>

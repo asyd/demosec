@@ -4,10 +4,11 @@
 
 <web-app>
     <display-name>OpenCSI Security demo application</display-name>
+
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
-            <form-login-page>/login.html</form-login-page>
+            <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginfailed.html</form-error-page>
         </form-login-config>
     </login-config>
@@ -26,6 +27,20 @@
         <auth-constraint>
             <description>Only for managers</description>
             <role-name>Managers</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secure pages</web-resource-name>
+            <description>accessible by all authenticated users </description>
+            <url-pattern>/welcome.jsp</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>All users</description>
+            <role-name>Managers</role-name>
+            <role-name>Customers</role-name>
         </auth-constraint>
     </security-constraint>
     

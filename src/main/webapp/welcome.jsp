@@ -11,8 +11,8 @@
         <jsp:include page="header.jsp" />
 
         <div class="container">
-            <h1>Hello World!</h1>
-            <p>This a public page, everyone can read it. If you want to read 
+            <h1>Welcome <% out.println(request.getRemoteUser()); %> </h1>
+            <p>This is a private page, that means you're authenticated.
                 <a href="/demosec/private/">this page</a> you need to be authenticated through a
                 container realm with the role <b>manager</b>.</a></p>
 
