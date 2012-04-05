@@ -13,7 +13,8 @@
         <form-login login-page="/login.jsp" authentication-failure-url="/login-error.jsp" />
     </http>
     
-    <beans:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+<!--    <beans:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource"> -->
+    <beans:bean id="contextSource" class="org.springframework.security.ldap.ppolicy.PasswordPolicyAwareContextSource">
         <beans:constructor-arg value="ldap://localhost:1389/dc=opencsi,dc=com" />
     </beans:bean>
 

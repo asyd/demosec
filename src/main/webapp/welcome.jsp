@@ -12,11 +12,6 @@
 
         <div class="container">
             <h1>Welcome <% out.println(request.getRemoteUser());%> </h1>
-            <% out.println(request.isUserInRole("Managers")); %>
-            <% out.println(request.isUserInRole("managers")); %>
-            <% out.println(request.isUserInRole("MANAGERS")); %>
-            <% out.println(request.isUserInRole("ROLE_MANAGERS")); %>
-            <% out.println(request.isUserInRole("ROLE_USER")); %>
             <p>This is a private page, that means you're authenticated.
                 <a href="/demosec/private/">this page</a> you need to be authenticated through a
                 container realm with the role <b>manager</b>.</a></p>
