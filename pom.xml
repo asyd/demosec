@@ -15,8 +15,8 @@
 
     <distributionManagement>
         <repository>
-            <id>local-nexus-snapshot</id>
-            <url>dav:http://192.168.82.129:8081/nexus/content/repositories/local-nexus-snapshot/</url>
+            <id>local-nexus-release</id>
+            <url>dav:http://192.168.82.129:8081/nexus/content/repositories/local-nexus-release/</url>
         </repository>
         <snapshotRepository>
             <id>local-nexus-snapshot</id>
