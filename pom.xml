@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
+    <name>demosec</name>
     <groupId>com.opencsi</groupId>
     <artifactId>demosec</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -13,7 +13,12 @@
         <url>https://github.com/asyd/demosec</url>
     </scm>
 
-    <name>demosec</name>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>local-nexus-snapshot</id>
+            <url>dav:http://192.168.82.129:8081/nexus/content/repositories/local-nexus-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -44,6 +49,31 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/distribution.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <tagBase>https://svn.apache.org/repos/asf/maven/components/releases</tagBase>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
@@ -95,6 +125,13 @@
                 </executions>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
     </build>
 
 </project>
