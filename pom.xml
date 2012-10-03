@@ -7,6 +7,11 @@
     <artifactId>demosec</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <scm>
+        <connection>scm:git:https://github.com/asyd/demosec</connection>
+        <developerConnection>scm:git:https://github.com/asyd/demosec</developerConnection>
+        <url>https://github.com/asyd/demosec</url>
+    </scm>
 
     <name>demosec</name>
 
@@ -17,21 +22,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-            <version>3.0.7.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>3.0.7.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>3.0.7.RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>com.opencsi</groupId>
             <artifactId>netscape-ldap-jdk</artifactId>
@@ -54,6 +44,11 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.1</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
